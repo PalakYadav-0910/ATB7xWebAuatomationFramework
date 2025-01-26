@@ -1,17 +1,23 @@
 package org.example.tests.sample;
 
+import org.example.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TestVWOLogin {
 
+    @BeforeTest
+    public void setUp(){
+        DriverManager.init();
+    }
+
     @Test
     public void testLoginNegativeVWO() {
-        WebDriver driver = new EdgeDriver();
+        WebDriver driver = DriverManager.getDriver();
         driver.get("https://app.vwo.com");
         System.out.println(driver.getTitle());
         Assert.assertEquals(driver.getTitle(), "Login - VWO");
